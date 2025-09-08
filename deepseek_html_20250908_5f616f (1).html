@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería BTX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        
+        .card {
+            background: #2c2c2c;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .service {
+            background: #3a3a3a;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .service:hover {
+            transform: translateY(-5px);
+            background: #444;
+        }
+        
+        .service i {
+            font-size: 1.8rem;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        
+        .btn-primary {
+            background: #d4af37;
+            color: #1a1a1a;
+        }
+        
+        .btn-primary:hover {
+            background: #c19b2e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #3a3a3a;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+        }
+        
+        .btn-secondary:hover {
+            background: #d4af37;
+            color: #1a1a1a;
+            transform: translateY(-3px);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            height: 120px;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #d4af37;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .contact-info p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .contact-info i {
+            color: #d4af37;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            color: #d4af37;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: #2c2c2c;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .modal h2 {
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: -20px;
+            margin-right: -10px;
+        }
+        
+        .close:hover {
+            color: #fff;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        input, select {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #3a3a3a;
+            color: #fff;
+        }
+        
+        /* Efectos de carga para la app */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card, .btn {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-cut"></i>
+            </div>
+            <h1>Barbería BTX</h1>
+            <p class="tagline">Estilo y precisión en cada corte</p>
+        </header>
+        
+        <div class="card">
+            <h2><i class="fas fa-concierge-bell"></i> Nuestros Servicios</h2>
+            <div class="services">
+                <div class="service">
+                    <i class="fas fa-cut"></i>
+                    <p>Corte de Cabello</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-air-freshener"></i>
+                    <p>Arreglo de Barba</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-spa"></i>
+                    <p>Mascarillas</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-palette"></i>
+                    <p>Coloración</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-calendar-alt"></i> Programar Cita</h2>
+            <p>Reserva tu cita con nuestros expertos barberos</p>
+            <button class="btn btn-primary" id="btnCita">
+                <i class="fas fa-calendar-check"></i> Reservar Ahora
+            </button>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-map-marker-alt"></i> Nuestra Ubicación</h2>
+            <p>Visítanos en Turbaco, Bolívar</p>
+            <button class="btn btn-secondary" id="btnUbicacion">
+                <i class="fas fa-directions"></i> Cómo Llegar
+            </button>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fab fa-whatsapp"></i> Contacto WhatsApp</h2>
+            <p>Habla directamente con nosotros</p>
+            <a class="btn btn-primary" id="btnWhatsApp" href="https://wa.me/573125643723" target="_blank">
+                <i class="fab fa-whatsapp"></i> Chatear por WhatsApp
+            </a>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-images"></i> Galería</h2>
+            <div class="gallery">
+                <div class="gallery-item"><i class="fas fa-chair"></i></div>
+                <div class="gallery-item"><i class="fas fa-razor-barber"></i></div>
+                <div class="gallery-item"><i class="fas fa-spray-can"></i></div>
+                <div class="gallery-item"><i class="fas fa-store"></i></div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <p><i class="fas fa-clock"></i> Horario: Lunes a Sábado 9:00 AM - 7:00 PM</p>
+            <p><i class="fas fa-phone"></i> Teléfono: (312) 564-3723</p>
+            <p><i class="fas fa-map-pin"></i> Dirección: Turbaco, Bolívar</p>
+        </div>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        
+        <footer>
+            <p>© 2023 Barbería BTX - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <!-- Modal para programar cita -->
+    <div id="modalCita" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-calendar-check"></i> Programar Cita</h2>
+            <form id="citaForm">
+                <input type="text" placeholder="Nombre completo" required>
+                <input type="tel" placeholder="Teléfono" required>
+                <input type="email" placeholder="Email">
+                <select required>
+                    <option value="" disabled selected>Seleccione un servicio</option>
+                    <option value="corte">Corte de Cabello</option>
+                    <option value="barba">Arreglo de Barba</option>
+                    <option value="combo">Corte + Barba</option>
+                    <option value="color">Coloración</option>
+                </select>
+                <input type="datetime-local" required>
+                <button type="submit" class="btn btn-primary">Confirmar Cita</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Elementos del DOM
+        const modalCita = document.getElementById('modalCita');
+        const btnCita = document.getElementById('btnCita');
+        const btnUbicacion = document.getElementById('btnUbicacion');
+        const btnWhatsApp = document.getElementById('btnWhatsApp');
+        const closeModal = document.querySelector('.close');
+        const citaForm = document.getElementById('citaForm');
+
+        // Abrir modal de programación de cita
+        btnCita.addEventListener('click', () => {
+            modalCita.style.display = 'flex';
+        });
+
+        // Cerrar modal
+        closeModal.addEventListener('click', () => {
+            modalCita.style.display = 'none';
+        });
+
+        // Cerrar modal al hacer clic fuera del contenido
+        window.addEventListener('click', (event) => {
+            if (event.target === modalCita) {
+                modalCita.style.display = 'none';
+            }
+        });
+
+        // Manejar envío del formulario
+        citaForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Cita programada con éxito! Te contactaremos para confirmar.');
+            modalCita.style.display = 'none';
+            citaForm.reset();
+        });
+
+        // Función para mostrar ubicación
+        btnUbicacion.addEventListener('click', () => {
+            alert('Barbería BTX se encuentra en Turbaco, Bolívar. A continuación se abrirá Google Maps.');
+            window.open('https://www.google.com/maps/place/Turbaco,+Bolívar/,', '_blank');
+        });
+
+        // Confirmación para WhatsApp
+        btnWhatsApp.addEventListener('click', (e) => {
+            if (!confirm('¿Deseas contactar a Barbería BTX por WhatsApp?')) {
+                e.preventDefault();
+            }
+        });
+
+        // Efectos de interacción para los servicios
+        document.querySelectorAll('.service').forEach(service => {
+            service.addEventListener('click', function() {
+                const serviceName = this.querySelector('p').textContent;
+                alert(`Has seleccionado: ${serviceName}. Serás redirigido al sistema de citas.`);
+                modalCita.style.display = 'flex';
+            });
+        });
+
+        // Simular carga de la aplicación
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = 0;
+            document.body.style.transition = 'opacity 0.5s ease-in';
+            
+            setTimeout(() => {
+                document.body.style.opacity = 1;
+            }, 100);
+        });
+    </script>
+</body>
+</html>
